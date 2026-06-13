@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ellievate | Nonprofit Executive Coaching</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal-deep:   #0B5E5E;
+      --teal-mid:    #0E7070;
+      --teal-light:  #E8F4F4;
+      --terracotta:  #C87850;
+      --warm-white:  #F8F4EF;
+      --near-black:  #1A1A1A;
+      --mid-gray:    #5A5A5A;
+      --rule:        #D8D2CB;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--warm-white);
+      color: var(--near-black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      background: rgba(11,94,94,0.97);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: var(--terracotta);
+      color: #fff !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 3px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: #b5673f !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0B4545 0%, #0B5E5E 45%, #145C5C 70%, #1A3535 100%);
+      display: flex; align-items: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 40%, rgba(200,120,80,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 380px; gap: 6rem; align-items: center;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 28px; height: 1.5px;
+      background: var(--terracotta);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.18;
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+    }
+    .hero-sub {
+      font-size: 1.05rem; font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--terracotta);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      font-size: 0.92rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: 3px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #b5673f; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      padding: 0.85rem 2rem;
+      font-size: 0.92rem; font-weight: 500;
+      letter-spacing: 0.04em;
+      border-radius: 3px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+
+    .hero-portrait {
+      position: relative;
+    }
+    .hero-portrait img {
+      width: 100%; border-radius: 4px;
+      display: block;
+      filter: brightness(0.95) contrast(1.03);
+    }
+    .hero-portrait::before {
+      content: '';
+      position: absolute; top: -16px; right: -16px;
+      width: 100%; height: 100%;
+      border: 2px solid rgba(200,120,80,0.45);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    /* ── STAT BANNER ── */
+    .stat-banner {
+      background: #fff;
+      border-top: 3px solid var(--teal-deep);
+      padding: 3.5rem 5%;
+    }
+    .stat-banner-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 1.5rem;
+      border-right: 1px solid var(--rule);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem; font-weight: 700;
+      color: var(--teal-deep);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.88rem; font-weight: 500;
+      color: var(--mid-gray);
+      letter-spacing: 0.03em;
+      line-height: 1.5;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 7rem 5%;
+      background: var(--warm-white);
+    }
+    .about-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+    }
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+    .section-eyebrow::before {
+      content: ''; display: block;
+      width: 24px; height: 1.5px;
+      background: var(--terracotta);
+    }
+    .about h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      font-weight: 600; line-height: 1.25;
+      color: var(--near-black);
+      margin-bottom: 1.5rem;
+    }
+    .about p {
+      font-size: 1rem; font-weight: 300;
+      color: var(--mid-gray);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+    .about-quote {
+      border-left: 3px solid var(--teal-deep);
+      padding-left: 1.5rem;
+      margin: 2.5rem 0;
+    }
+    .about-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-style: italic;
+      color: var(--teal-deep);
+      font-weight: 400;
+    }
+    .value-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 1.1rem;
+    }
+    .value-list li {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .value-icon {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--teal-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 0.1rem;
+    }
+    .value-icon svg { width: 14px; height: 14px; stroke: var(--teal-deep); fill: none; stroke-width: 2.5; }
+    .value-text { font-size: 0.95rem; color: var(--mid-gray); line-height: 1.6; }
+
+    /* ── PROOF CALLOUT ── */
+    .proof-callout {
+      background: var(--teal-deep);
+      padding: 6rem 5%;
+      overflow: hidden;
+      position: relative;
+    }
+    .proof-callout::before {
+      content: '65%';
+      position: absolute; top: 50%; right: 5%;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 22vw; font-weight: 700;
+      color: rgba(255,255,255,0.05);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .proof-callout-inner {
+      max-width: 1100px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .proof-callout .section-eyebrow { color: rgba(255,255,255,0.6); }
+    .proof-callout .section-eyebrow::before { background: rgba(255,255,255,0.4); }
+    .proof-callout h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700; color: #fff;
+      line-height: 1.2;
+      max-width: 680px;
+      margin-bottom: 1.5rem;
+    }
+    .proof-callout h2 em {
+      font-style: italic; color: rgba(255,255,255,0.65);
+    }
+    .proof-callout p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem; max-width: 540px;
+      line-height: 1.75;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 7rem 5%;
+      background: #fff;
+    }
+    .services-inner { max-width: 1100px; margin: 0 auto; }
+    .services-header { margin-bottom: 4rem; }
+    .services-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      font-weight: 600;
+      color: var(--near-black);
+    }
+    .service-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      border: 2px solid var(--teal-deep);
+    }
+    .service-card {
+      padding: 3rem;
+      background: #fff;
+      border: 1px solid var(--rule);
+      transition: background 0.2s;
+      position: relative;
+    }
+    .service-card:hover { background: var(--teal-light); }
+    .service-tag {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.2rem;
+    }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 600;
+      color: var(--near-black);
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+    .service-card p {
+      font-size: 0.95rem; color: var(--mid-gray);
+      line-height: 1.75; margin-bottom: 1.5rem;
+    }
+    .service-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.88rem; font-weight: 600;
+      color: var(--teal-deep);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .service-link svg { width: 14px; height: 14px; transition: transform 0.2s; }
+    .service-link:hover svg { transform: translateX(3px); }
+
+    /* ── CLIENTS ── */
+    .clients {
+      padding: 6rem 5%;
+      background: var(--warm-white);
+    }
+    .clients-inner { max-width: 1100px; margin: 0 auto; }
+    .clients-header {
+      display: flex; align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .clients-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 600;
+      color: var(--near-black);
+    }
+    .clients-header p {
+      font-size: 0.9rem; color: var(--mid-gray);
+      max-width: 400px; line-height: 1.6;
+    }
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .logo-cell {
+      background: #fff;
+      padding: 2.2rem 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-cell img {
+      max-width: 120px; max-height: 48px;
+      object-fit: contain; filter: grayscale(1); opacity: 0.6;
+      transition: opacity 0.2s, filter 0.2s;
+    }
+    .logo-cell:hover img { opacity: 1; filter: grayscale(0); }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 8rem 5%;
+      background: #fff;
+      text-align: center;
+    }
+    .cta-inner { max-width: 640px; margin: 0 auto; }
+    .cta-section .section-eyebrow { justify-content: center; }
+    .cta-section .section-eyebrow::before { display: none; }
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700; color: var(--near-black);
+      line-height: 1.2; margin-bottom: 1.2rem;
+    }
+    .cta-section p {
+      font-size: 1rem; color: var(--mid-gray);
+      line-height: 1.75; margin-bottom: 2.5rem;
+    }
+    .cta-divider {
+      width: 48px; height: 2px;
+      background: var(--terracotta);
+      margin: 1.5rem auto 2rem;
+    }
+    .cta-region {
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--mid-gray); margin-top: 1.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--near-black);
+      padding: 3rem 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+    .footer-links {
+      display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.45);
+      text-decoration: none; letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-copy {
+      font-size: 0.8rem; color: rgba(255,255,255,0.3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-portrait { max-width: 320px; margin: 0 auto; }
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .stat-banner-inner { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--rule); }
+      .stat-item:last-child { border-bottom: none; }
+      .service-grid { grid-template-columns: 1fr; }
+      .logo-grid { grid-template-columns: repeat(3, 1fr); }
+      .clients-header { flex-direction: column; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .logo-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-portrait { max-width: 320px; margin: 0 auto; }
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .stat-banner-inner { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--rule); }
+      .stat-item:last-child { border-bottom: none; }
+      .service-grid { grid-template-columns: 1fr; }
+      .logo-grid { grid-template-columns: repeat(3, 1fr); }
+      .clients-header { flex-direction: column; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .logo-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* staggered children */
+    .reveal-group > * {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal-group.visible > *:nth-child(1) { transition-delay: 0s;    opacity: 1; transform: none; }
+    .reveal-group.visible > *:nth-child(2) { transition-delay: 0.12s; opacity: 1; transform: none; }
+    .reveal-group.visible > *:nth-child(3) { transition-delay: 0.24s; opacity: 1; transform: none; }
+    .reveal-group.visible > *:nth-child(4) { transition-delay: 0.36s; opacity: 1; transform: none; }
+    .reveal-group.visible > *:nth-child(5) { transition-delay: 0.48s; opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-group > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Ellievate</a>
+    <ul class="nav-links">
+      <li><a href="#">About Ellie</a></li>
+      <li><a href="#">NLN Coaching</a></li>
+      <li><a href="#">1:1 Coaching</a></li>
+      <li><a href="#">Client Stories</a></li>
+      <li><a href="https://calendly.com/ellie-ellievate/60-minute-discovery-meeting" class="nav-cta">Book a Call</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="hero-eyebrow">Nonprofit Executive Coaching</span>
+        <h1>More joy at work.<br><em>More impact in the world.</em></h1>
+        <p class="hero-sub">You got into this work because you care deeply. Ellie Jacques helps nonprofit leaders in Boulder and Denver-metro build teams they love leading—and organizations that actually deliver on their mission.</p>
+        <div class="hero-actions">
+          <a href="https://calendly.com/ellie-ellievate/60-minute-discovery-meeting" class="btn-primary">Let's Talk — It's Free</a>
+          <a href="#services" class="btn-ghost">See How It Works</a>
+        </div>
+      </div>
+      <div class="hero-portrait">
+        <img
+          src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/e9453c84-71e4-4dfb-b569-66314f4f1577/CDT+headshots-44.jpg"
+          alt="Ellie Jacques, Executive Leadership Coach"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT BANNER -->
+  <section class="stat-banner">
+    <div class="stat-banner-inner reveal-group">
+      <div class="stat-item">
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Years coaching nonprofit leaders<br>in 3 countries</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">65%</div>
+        <div class="stat-label">Average improvement in Organizational<br>Assessment scores after one year</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3–7×</div>
+        <div class="stat-label">Return on investment<br>from coaching engagement</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="reveal">
+        <span class="section-eyebrow">About Ellie</span>
+        <h2>Coaching rooted in twelve years of real-world experience</h2>
+        <p>I've spent my career working inside the organizations nonprofits depend on—disability resource, addiction recovery, workforce development, community development, and education. That foundation informs everything I bring to a coaching relationship.</p>
+        <p>Across 3 countries and 8 nationalities, I've seen that the dreams driving people into nonprofit work are universal: we all seek relationships, security, and meaning. My job is to help you build an organization worthy of those dreams.</p>
+        <div class="about-quote">
+          <p>"Coaching is an ongoing relationship—not a set of recommendations or a diagnostic report."</p>
+        </div>
+        <a href="mailto:ellie@ellievate.co" class="btn-primary" style="margin-top:0.5rem">Connect by Email</a>
+      </div>
+      <div class="reveal" style="transition-delay: 0.15s;">
+        <ul class="value-list">
+          <li>
+            <span class="value-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            </span>
+            <span class="value-text"><strong>Resilience through change.</strong> Helps individuals and teams navigate growth, weather growing pains, and seize new opportunities.</span>
+          </li>
+          <li>
+            <span class="value-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            </span>
+            <span class="value-text"><strong>Leaders who lead, not facilitate.</strong> Creates rhythms, focus, and accountability so you can work <em>on</em> your organization.</span>
+          </li>
+          <li>
+            <span class="value-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            </span>
+            <span class="value-text"><strong>Best-practice fidelity.</strong> Ensures your team actually implements the systems that work—not just learns about them.</span>
+          </li>
+          <li>
+            <span class="value-icon">
+              <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            </span>
+            <span class="value-text"><strong>Measurable ROI.</strong> A coaching engagement generates 3–7% return on the investment—and the results compound over time.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF CALLOUT -->
+  <section class="proof-callout">
+    <div class="proof-callout-inner reveal">
+      <span class="section-eyebrow">Next Level Nonprofit</span>
+      <h2>Organizations that work with a coach for one year improve their Organizational Assessment scores <em>by an average of 65%.</em></h2>
+      <p>That means more unified teams, a more compelling vision, more effective strategy, and more disciplined execution. It's not a workshop. It's a transformation.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-inner">
+      <div class="services-header reveal">
+        <span class="section-eyebrow">What I Offer</span>
+        <h2>Two paths to lasting impact</h2>
+      </div>
+      <div class="service-grid reveal-group">
+        <div class="service-card">
+          <span class="service-tag">Team Coaching</span>
+          <h3>Next Level Nonprofit Operating System</h3>
+          <p>A full operating system for passionate leadership teams ready to professionalize and amplify their impact. Covers team alignment, vision clarity, strategic direction, and disciplined execution—with ongoing coaching to make it stick.</p>
+          <a href="https://www.ellievate.co/nln-coaching" class="service-link">
+            Learn about NLN Coaching
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="service-card">
+          <span class="service-tag">Individual Coaching</span>
+          <h3>One-on-One Leadership Coaching</h3>
+          <p>60–90 minute sessions tailored to your professional actualization. Set clear goals, anchor to your personal values, and pursue excellence with accountability and encouragement—at whatever level of commitment fits you.</p>
+          <a href="https://www.ellievate.co/11-coaching" class="service-link">
+            Learn about 1:1 Coaching
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="service-card" style="grid-column: 1 / -1;">
+          <span class="service-tag">Free Workshops</span>
+          <h3>Single-Tool NLN Workshops</h3>
+          <p>Not ready for the full operating system? Get a taste of best-practice NLN tools in a low-commitment format—and a chance to work with Ellie before committing to a deeper engagement. Available topics: Building a Dream Team · Making Meetings Work · Determining Direction · Build Your Own.</p>
+          <a href="https://calendly.com/ellie-ellievate/60-minute-discovery-meeting" class="service-link">
+            Register for a free workshop
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <section class="clients" id="clients">
+    <div class="clients-inner">
+      <div class="clients-header reveal">
+        <div>
+          <span class="section-eyebrow">Client Organizations</span>
+          <h2>Trusted by nonprofits that matter</h2>
+        </div>
+        <p>A coach, volunteer, board member, and nonprofit partner with experience across disability resource, addiction recovery, workforce development, community development, and education.</p>
+      </div>
+      <div class="logo-grid reveal">
+        <div class="logo-cell">
+          <img src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/205ca3b0-1ed6-46ba-bfc2-2b7a4685e454/7490.jpg" alt="Genesee County Habitat for Humanity" />
+        </div>
+        <div class="logo-cell">
+          <img src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/1625ceba-fd6c-4d57-ac6e-7fa0f3fb42bc/8d09fcb5-2216-422d-97ff-f1feeaa4a06e.jpg" alt="Denver Public Schools" />
+        </div>
+        <div class="logo-cell">
+          <img src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/6c0e87da-6bde-4e71-9686-add46cbcc4d2/Virginia_Tech_logo.svg.png" alt="Virginia Tech" />
+        </div>
+        <div class="logo-cell">
+          <img src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/66108119-3c5e-45f8-80e0-cb2558ad3b01/mmc.png" alt="Mott Middle College" />
+        </div>
+        <div class="logo-cell">
+          <img src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/311c0a46-9401-42fe-a9c0-5e8fb0c7983b/download.png" alt="SIPI" />
+        </div>
+        <div class="logo-cell">
+          <img src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/326f45b9-4cb1-4d07-9132-c0b1f0643036/download.jpg" alt="Flint's Children's Museum" />
+        </div>
+        <div class="logo-cell">
+          <img src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/e795e1d9-22b5-4e2f-9c64-913f12443c9c/10386929_741221739345398_7148379628255252641_o.png" alt="Herotown" />
+        </div>
+        <div class="logo-cell">
+          <img src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/4f33ba60-f9af-4d8b-8619-3f2462a36686/the_heroic_imagination_project_cover.jpg" alt="Heroic Imagination Project" />
+        </div>
+        <div class="logo-cell">
+          <img src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/fad035a1-91d5-4306-b2fa-a529673300d8/TDNStackedLogo_Color-700x500.png" alt="Toronto District School Board" />
+        </div>
+        <div class="logo-cell">
+          <img src="https://images.squarespace-cdn.com/content/v1/6939e5171510d02fe129e106/4f360d7e-0991-45bc-a1dc-e2310c68b04f/static1.squarespace.webp" alt="St. Luke N.E.W. Life Center" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="cta-inner reveal">
+      <span class="section-eyebrow">Get Started</span>
+      <h2>Ready to take your organization to the next level?</h2>
+      <div class="cta-divider"></div>
+      <p>Book a free 60-minute discovery meeting. We'll explore where your organization is, where you want it to go, and whether coaching is the right fit.</p>
+      <a href="https://calendly.com/ellie-ellievate/60-minute-discovery-meeting" class="btn-primary" style="font-size:1rem; padding:1rem 2.5rem;">Schedule a Discovery Meeting →</a>
+      <p class="cta-region">Serving Boulder · Denver Metro · Fort Collins</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Ellievate</span>
+    <ul class="footer-links">
+      <li><a href="#">About</a></li>
+      <li><a href="#">NLN Coaching</a></li>
+      <li><a href="#">1:1 Coaching</a></li>
+      <li><a href="#">Client Stories</a></li>
+      <li><a href="mailto:ellie@ellievate.co">ellie@ellievate.co</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Ellievate LLC</span>
+  </footer>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .reveal-group').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
